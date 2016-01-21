@@ -1,5 +1,5 @@
 var ALY = require('../../index.js');
-var config = require('./config');
+var config = require('./testConfig');
 var should = require('should');
 
 var sls = new ALY.SLS({
@@ -11,7 +11,7 @@ var sls = new ALY.SLS({
 
 var projectName = config.projectName;
 var logStoreName = config.logStoreName;
-var TOPIC = 'test/test2';
+var TOPIC = 'test/test3';
 
 
 describe('SLS Function Test', function(){
@@ -26,7 +26,7 @@ describe('SLS Function Test', function(){
                 var logs = [];
                 var nowT = Math.floor(new Date().getTime()/1000);
 
-                for(var i=101;i>0;i--){
+                for(var i=10;i>0;i--){
                     logs.push({
                         time:  nowT-i,
                         contents: [{
@@ -34,7 +34,7 @@ describe('SLS Function Test', function(){
                             value: '1'
                         },{
                             key: 'b',
-                            value: '2'
+                            value: '/a/b/c'
                         },{
                             key: 'c',
                             value: ''+Math.random()
@@ -199,10 +199,11 @@ describe('SLS Function Test', function(){
                 from: from,
                 to: to,
                 topic: TOPIC,
+                query: '\/a\/b\/c',
                 offset: 0,
                 line: 2
             }, function(err, data){
-
+                console.log(data);
                 should(err===null).be.true;
                 data.count.should.be.below(3);
 
