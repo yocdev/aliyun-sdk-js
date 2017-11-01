@@ -774,6 +774,9 @@
           "ClientToken": {
             "type": "string"
           },
+          "KeyPairName": {
+            "type": "string"
+          },
           "VlanId": {
             "type": "string"
           },
